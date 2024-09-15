@@ -4,7 +4,7 @@
 
 Demo地址: https://yescf00.pages.dev/
 
-Telegram反馈群: https://t.me/+ft-zI76oovgwNmRh/
+Full HTML5 & CSS3 & Vanilla Javascript
 
 ### 用法 Usage
 

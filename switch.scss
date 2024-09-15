@@ -1,0 +1,41 @@
+$switch-active-color: #4d83af;
+$switch-active-timing: .25s;
+
+input[type="checkbox"].switch{
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background: #ccccccdd;
+    border-radius: 10px;
+    transition: border-color $switch-active-timing, background-color $switch-active-timing;
+    margin: 0;
+}
+
+input[type="checkbox"].switch::after {
+    content: '';
+    display: inline-block;
+    width: 1rem;
+    height:1rem;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0, 0, 2px, #999;
+    transition: $switch-active-timing;
+    top: 2px;
+    position: absolute;
+    left: 2px;
+}
+
+input[type="checkbox"].switch:checked {
+    background: $switch-active-color;
+}
+
+input[type="checkbox"].switch:checked::after {
+    content: '';
+    position: absolute;
+    left: 55%;
+    top: 2px;
+}

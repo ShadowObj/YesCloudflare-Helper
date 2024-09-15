@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<title>YesCloudflare配置助手</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<!--link rel="stylesheet" type="text/css" href="/static/main.css"-->
+</head>
+<body>
+    <form class="main-container col-gap-l">
+        <a class="main-title no-text-decoration" href="#" target="_blank">
+            <span>
+                YesCloudflare配置助手
+            </span>
+        </a> 
+        <div class="row-container">
+            <a class="subtitle row-gap-s" href="https://telegra.ph/%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96Cloudflare%E5%8F%8D%E4%BB%A3IP%E5%88%97%E8%A1%A8%E6%8C%87%E5%8C%97-08-21" target="_blank">
+                <div class="tooltiper-left">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-help"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 17l0 .01" /><path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" /></svg>
+                    <span class="tooltip">点击查看教程</span>
+                </div>
+            <span>如何使用?</span>
+            </a>
+        </div>
+        <div class="row-container row-gap-s">
+            <text class="label labelCard">🔑APIKEY</text><input type="search" name="key" placeholder="请输入APIKEY" class="inputCard" oninput="configObj.changeStr(this)" required>
+        </div>
+        <div class="row-container row-gap-s">
+            <text class="label labelCard">🗺️地区</text>
+            <input type="text" name="region" placeholder="请输入地区对应的ISO1366二字码 (留空不限, 英文逗号分隔)" class="inputCard" oninput="configObj.changeStr(this)">
+            <div class="tooltiper-bottom">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-help"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 17l0 .01" /><path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" /></svg>
+                <span class="tooltip">ISO1366二字码列表<br />见维基百科</span>
+            </div>
+        </div>
+        <div class="row-container row-gap-s">
+            <input type="text" name="asn" placeholder="请输入ASN (留空不限, 英文逗号分隔)" class="inputCard" oninput="configObj.changeStr(this)">
+            <input type="text" name="port" placeholder="请输入端口 (留空不限, 英文逗号分隔)" class="inputCard" oninput="configObj.changeStr(this)">
+        </div>
+        <div class="row-container row-gap-l">
+            <div class="row-container switchCard">
+                <text class="label">💡自动去重</text>
+                <div class="row-container row-gap-s">
+                <div class="tooltiper-bottom">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-help"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 17l0 .01" /><path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" /></svg>
+                    <span class="tooltip">重复IP仅保留一个结果<br />(默认全部保留)</span>
+                </div>
+                    <input type="checkbox" name="norepeat" class="switch" oninput="configObj.changeBool(this)">
+                </div>
+            </div>
+            <div class="row-container switchCard">
+                <text class="label">🔋自动获取</text>
+                <div class="row-container row-gap-s">
+                    <div class="tooltiper-bottom">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-help"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 17l0 .01" /><path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" /></svg>
+                        <span class="tooltip">自动获取下一页内容<br />(默认需要确认)</span>
+                    </div>
+                    <input type="checkbox" name="auto" class="switch" oninput="configObj.changeBool(this)">
+                </div>
+            </div>
+            <div class="row-container row-gap-s">
+                <div class="switchCard">
+                    <text class="label">🔍页面区间</text>
+                    <div class="tooltiper-bottom">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-help"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 17l0 .01" /><path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" /></svg>
+                        <span class="tooltip">仅支持1-100之间的整数<br />(指定同一个值以查找单页)</span>
+                    </div>
+                </div>
+                <input type="number" class="page-range switchCard" name="page-start" placeholder="1" max="100" min="1" step="1" oninput='value=value.replace(/[^\d]/g,""),configObj.changePageRange(this, document.getElementsByName("page-end")[0])'>
+                <text class="label switchCard"> - </text>
+                <input type="number" class="page-range switchCard" name="page-end"  placeholder="100" max="100" min="1" step="1" oninput='value=value.replace(/[^\d]/g,""),configObj.changePageRange(document.getElementsByName("page-start")[0], this)'>
+            </div>
+        </div>
+        <textarea class="outputCard" readonly="true" placeholder="生成配置在此 (复制到config.toml)" rows="10"></textarea>
+        <div class="row-container row-gap-s">
+            <button type="button" class="button" onclick="createRipple(this),configObj.copy2Clip()">
+                <div class="ticker"></div>
+                <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-copy"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" /><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" /></svg>
+                <span>复制配置</span>
+            </button>
+            <button type="button" class="button" onclick='createRipple(this),configObj.save("config.toml")' style="background: #82C7A3;">
+                <div class="ticker"></div>
+                <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-download"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>
+                <span>下载配置</span>
+            </button>
+            <button type="button" class="button" onclick="createRipple(this),configObj.clear()" style="background: #E27C7A">
+                <div class="ticker"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                <span>清空配置</span>
+            </button>
+        </div>
+    </form>
+    <div class="cornerBtn-grp row-gap-s">
+        <a class="no-text-decoration" href="https://github.com/ShadowObj/YesCloudflare/" target="_blank">
+            <div class="cornerBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-github"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></svg>
+                <span>Github</span>
+            </div>
+        </a>
+        <a class="no-text-decoration" href="https://t.me/+nD8M2WgeufsxMjAx" target="_blank">
+            <div class="cornerBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                <span>Telegram</span>
+            </div>
+        </a>
+    </div>
+    <footer id="site-footer">
+        Made With ❤️ & <a href="https://pages.cloudflare.com/" target="_blank">Cloudflare Pages.</a> | © 2024{{ NaN }} <a href="https://github.com/ShadowObj" target="_blank">Object Shadow</a>
+    </footer>
+    <script>
+        function createRipple(target) {
+            const button = target;
+            const circle = document.createElement("div");
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+            circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+            circle.classList.add("ripple"); 
+            let ripple = button.querySelector('.ripple')
+            if (ripple) {
+                ripple.remove();
+            }
+            button.appendChild(circle);
+        }
+
+        function sinceCalc() {
+            result = ""
+            year = new Date().getFullYear()
+            if (year > 2024) {
+                result = "-" + year.toString()
+            }
+            document.querySelector("#site-footer").innerHTML = document.getElementById("site-footer").innerHTML.replace("{{ NaN }}",result)
+        }
+        sinceCalc()
+
+        class config {
+            json = {};
+            output = {};
+
+            reportValidity() {
+                var json = this.json;
+                var validity = true;
+                if (json["key"].length != 92) {
+                    this.output.value = "请输入正确的APIKEY";
+                    validity = false;
+                }
+                if (!this.input.reportValidity()) {
+                    validity = false;
+                }
+                return validity;
+            }
+
+            change(name, value) {
+                if (!this.reportValidity()) { return };
+                var toml = "";
+                var json = this.json;
+                json[name] = value;
+                for (let i in json) {
+                    toml += `${i} = ${json[i]}\r\n`;
+                }
+                this.output.value = toml;
+            }
+
+            changeStr(origin) {
+                this.change(origin.name, '"'+origin.value+'"');
+            }
+
+            changeNum(origin) {
+                this.change(origin.name, origin.value);
+            }
+
+            changeBool(origin) {
+                this.change(origin.name, origin.checked);
+            }
+
+            changePageRange(start, end) {
+                var st = start.value, ed = end.value;
+                console.log(st, ed);
+                if (st < 1 || st > 100) { st = 1; };
+                if (ed < 1 || ed > 100 ) { ed = 100; };
+                if (st > ed) { st = 1, ed = 100; };
+                this.change("page", `"${st}-${ed}"`);
+            }
+
+            copy2Clip() {
+                if (!this.output.value || !this.reportValidity()) { return };
+                var before = "";
+                navigator.clipboard.writeText(this.output.value);
+                before = this.output.value;
+                this.output.value = "已复制到剪贴板";
+                setTimeout(() => { this.output.value = before }, 800)
+            }
+
+            save(filename) {
+                if (!this.output.value || !this.reportValidity()) { return };
+                var before = "";
+                let urlObj = URL.createObjectURL(new Blob([this.output.value.toString()], {type: "text/plain"}));
+                let link = document.createElement('a');
+                link.target = "_blank";
+                link.href = urlObj;
+                link.download = filename;
+                link.click();
+                URL.revokeObjectURL(urlObj);
+                before = this.output.value;
+                this.output.value = "已开始下载";
+                setTimeout(() => { this.output.value = before }, 800);
+            }
+
+            clear() {
+                this.output.value = "";
+            }
+
+            constructor(input, output) {
+                this.json = {
+                    "key":'""',
+                    "port":'""',
+                    "asn":'""',
+                    "region":'""',
+                    "output":'"ip.txt"',
+                    "page":'""',
+                    "norepeat": false,
+                    "auto": false,
+                }
+                this.input = input;
+                this.output = output;
+            }
+        }
+
+        configObj = new config(
+            document.querySelector(".main-container"), 
+            document.querySelector(".outputCard"),
+        );
+
+        function tooltipLocate() {
+            for (let i of document.querySelectorAll(".tooltiper-bottom .tooltip")) {
+                i.style.setProperty("margin-left", (i.offsetWidth / 2 * -1).toString() + "px", "important");
+            };
+        }
+        tooltipLocate();
+    </script>
+</body>
+</html>
