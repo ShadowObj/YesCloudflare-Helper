@@ -1,7 +1,16 @@
-$switch-active-color: #4d83af;
-$switch-active-timing: .25s;
+:root {
+    --switch-color: #fff;
+    --switch-bgcolor: #ccccccdd;
+    --switch-active-color: #4d83af;
+}
 
-input[type="checkbox"].switch{
+:root[data-theme="dark"] {
+    --switch-color: #181a1b;
+    --switch-bgcolor: #313536;
+    --switch-active-color: #4d83af;
+}
+
+input[type="checkbox"].switch {
     outline: none;
     appearance: none;
     -webkit-appearance: none;
@@ -9,9 +18,9 @@ input[type="checkbox"].switch{
     position: relative;
     width: 40px;
     height: 20px;
-    background: #ccccccdd;
+    background: var(--switch-bgcolor);
     border-radius: 10px;
-    transition: border-color $switch-active-timing, background-color $switch-active-timing;
+    transition: border-color .25s, background-color .25s;
     margin: 0;
 }
 
@@ -21,16 +30,16 @@ input[type="checkbox"].switch::after {
     width: 1rem;
     height:1rem;
     border-radius: 50%;
-    background: #fff;
+    background: var(--switch-color);
     box-shadow: 0, 0, 2px, #999;
-    transition: $switch-active-timing;
+    transition: .25s;
     top: 2px;
     position: absolute;
     left: 2px;
 }
 
 input[type="checkbox"].switch:checked {
-    background: $switch-active-color;
+    background: var(--switch-active-color);
 }
 
 input[type="checkbox"].switch:checked::after {

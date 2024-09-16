@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <title>YesCloudflare配置助手</title>
-<link rel="stylesheet" type="text/css" href="main.css">
-<!--link rel="stylesheet" type="text/css" href="/static/main.css"-->
+<link rel="stylesheet" type="text/css" href="/static/main.css">
 </head>
 <body>
     <form class="main-container col-gap-l">
@@ -78,12 +77,12 @@
                 <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-copy"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" /><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" /></svg>
                 <span>复制配置</span>
             </button>
-            <button type="button" class="button" onclick='createRipple(this),configObj.save("config.toml")' style="background: #82C7A3;">
+            <button type="button" class="button" onclick='createRipple(this),configObj.save("config.toml")' style='background: var(--download-btn-bgcolor);'>
                 <div class="ticker"></div>
                 <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-download"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>
                 <span>下载配置</span>
             </button>
-            <button type="button" class="button" onclick="createRipple(this),configObj.clear()" style="background: #E27C7A">
+            <button type="button" class="button" onclick="createRipple(this),configObj.clear()" style="background: var(--clear-btn-bgcolor);">
                 <div class="ticker"></div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
                 <span>清空配置</span>
@@ -139,9 +138,8 @@
             output = {};
 
             reportValidity() {
-                var json = this.json;
                 var validity = true;
-                if (json["key"].length != 92) {
+                if (this.json["key"].length != (92 + 2)) {
                     this.output.value = "请输入正确的APIKEY";
                     validity = false;
                 }
@@ -152,10 +150,10 @@
             }
 
             change(name, value) {
-                if (!this.reportValidity()) { return };
                 var toml = "";
                 var json = this.json;
                 json[name] = value;
+                if (!this.reportValidity()) { return };
                 for (let i in json) {
                     toml += `${i} = ${json[i]}\r\n`;
                 }

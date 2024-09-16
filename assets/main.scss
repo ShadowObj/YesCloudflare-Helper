@@ -3,18 +3,37 @@
 @import "breakpoints.scss";
 
 :root {
-    --main-bgcolor: #181a1b;
-    --card-color: white;
-    --card-bgcolor: #1e2021;
+    --main-color: #1B365D;
+    --main-bgcolor: linear-gradient( 135deg, #EEAD92 10%, #6018DC 100%);
+    --main-title-color: linear-gradient(45deg, #EE9AE5, #5961F9, #EE9AE5, #5961F9);
+    --footer-color: #1B365D;
+    --card-color: #1B365D;
+    --card-bgcolor: white;
     --btn-color: white;
     --btn-bgcolor: #4d83af;
+    --download-btn-bgcolor: #82C7A3;
+    --clear-btn-bgcolor: #d57472;
+
     --btn-text-size: medium;
     --cornerBtn-size: 50px;
     --cornerBtn-text-size: large;
 
-    --shadow-l1: 0 0 0 1px rgba(0,0,0,.05),0 2px 4px 1px rgba(0,0,0,.09);
-    --shadow-l2: 0 0 0 1px rgba(0,0,0,.1),0 2px 4px 1px rgba(0,0,0,.18);
-    --shadow-l3: 0 0 0 1px rgba(0,0,0,.15),0 2px 4px 1px rgba(0,0,0,.27);
+    --shadow-l0: 0 0 0 1px rgba(0,0,0,.05),0 2px 4px 1px rgba(0,0,0,.09);
+    --shadow-l1: 0 0 0 1px rgba(0,0,0,.1),0 2px 4px 1px rgba(0,0,0,.18);
+    --shadow-l2: 0 0 0 1px rgba(0,0,0,.15),0 2px 4px 1px rgba(0,0,0,.27);
+    --shadow-l3: 0 0 0 1px rgba(0,0,0,.2),0 2px 4px 1px rgba(0,0,0,.36);
+}
+
+:root[data-theme="dark"] {
+    --main-color: white;
+    --main-bgcolor: #181a1b;
+    --footer-color: #606060;
+    --card-color: white;
+    --card-bgcolor: #181a1b;
+    --btn-color: white;
+    --btn-bgcolor: #3e698c;
+    --download-btn-bgcolor: #316e56;
+    --clear-btn-bgcolor: #d57472;
 }
 
 html,
@@ -35,8 +54,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    background: #181a1b;
+    color: var(--main-color);
+    background: var(--main-bgcolor);
 }
 
 .row-container {
@@ -86,7 +105,19 @@ body {
     min-height: 0;
 
     @extend .col-container;
+
+    :root & {
+        padding: 32px;
+        backdrop-filter: blur(6px);
+        //background: rgba(0,191,255, 0.102);
+        background: transparent;
+        box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px;
+        border: 0px rgba(255,255,255,0.4) solid;
+        border-bottom: 0px rgba(40,40,40,0.35) solid;
+        border-right: 0px rgba(40,40,40,0.35) solid;
+    }
 }
+
 
 .main-title span {
     font: {
@@ -94,7 +125,7 @@ body {
         weight: bold;
     }
     color: transparent;
-    background-image: linear-gradient(45deg, #f902ff, #00dbde, #f902ff, #00dbde);
+    background-image: var(--main-title-color);
     background-clip: text;
     background-size: 400%;
     animation: slideShine 18s linear infinite;
@@ -126,12 +157,18 @@ body {
     overflow: hidden;
     cursor: pointer;
     text-decoration: none;
-    box-shadow: var(--shadow-l1);
+    box-shadow: var(--shadow-l0);
+    &:hover {
+        box-shadow: var(--shadow-l1);
+    }
+    :root[data-theme="dark"] & {
+        box-shadow: var(--shadow-l1);
+        &:hover {
+            box-shadow: var(--shadow-l3);
+        }
+    }
     * {
         pointer-events: none;
-    }
-    &:hover {
-        box-shadow: var(--shadow-l3);
     }
     .ticker {
         pointer-events: none;
@@ -259,21 +296,27 @@ body {
         color: white;
         background: #4d83af;
         border-radius: calc(var(--cornerBtn-size) / 2);
-        transition: width .6s;
+        transition: width .6s,box-shadow .2s ease-in-out;
         display:flex;
         justify-content: center;
         align-items: center;
-        box-shadow: var(--shadow-l1);
-        * {
-            pointer-events: none;
-        }
+        box-shadow: var(--shadow-l0);
         &:hover {
             width: calc(var(--cornerBtn-size) * 2.8);
             //filter: brightness(1.2);
-            box-shadow: var(--shadow-l3);
+            box-shadow: var(--shadow-l1);
             span {
                 display: block;
             }
+        }
+        :root[data-theme="dark"] & {
+            box-shadow: var(--shadow-l1);
+            &:hover {
+                box-shadow: var(--shadow-l3);
+            }
+        }
+        * {
+            pointer-events: none;
         }
         span {
             display: none;
@@ -289,17 +332,20 @@ body {
     margin-bottom: 10px;
     position: fixed;
     bottom: 0;
-    color: #606060;
+    vertical-align: baseline;
+    color: var(--footer-color);
     font: {
         size: small;
         weight: bold;
     }
     a {
         @extend .no-text-decoration;
-        filter: brightness(1.25);
-        color: #606060;
+        color: inherit;
+        border-bottom: dotted 1px;
+        transition: border-bottom-color .2s ease-in-out;
         &:hover {
-            color: #808080;
+            border-bottom-color: transparent;
+            filter: brightness(1.25);
         }
     }
 }
